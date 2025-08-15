@@ -9,10 +9,9 @@ Consistent and idiomatic function naming improves your code’s readability, mai
 
 - **Use MixedCaps or mixedCaps for multiword names:** Prefer `ReadFile` or `readFile` over `read_file`. Avoid underscores.
 - **Names are significant for visibility:** An identifier starting with an uppercase letter is exported (public), while lowercase is unexported (private).
-- **Acronyms use all capitals:** Examples include `ServeHTTP`, `IDProcessor`. **todo: Take a look on it**
+- **Acronyms use all capitals:** Examples include `ServeHTTP`, `IDProcessor`.
 - **Be concise but clear:** Longer names do not necessarily enhance readability; brevity and clarity are key. If more explanation is needed, favor a good doc comment over a long name.
-- **Variable names are short when the context is clear:** E.g., use `i` for loop indexes, `r` for readers. For wider scope, use more descriptive names. **todo: Take a look on it**
-
+- **Variable names are short when the context is clear:** E.g., use `i` for loop indexes, `r` for readers. For wider scope, use more descriptive names. 
 
 ## Core Naming Conventions
 
@@ -66,8 +65,8 @@ func CalculateBMI(weightKg, heightM float64) float64 {
 
 - Multiword names: **MixedCaps** (camel case), no underscores.
 - **Verbs** for functions that perform actions (e.g., `SaveFile`, `UpdateRecord`) ex func use to run db queries.
-- **Nouns** or noun-like getters for retrieving data (e.g., `JobName()` not `GetJobName()`).
-- **Avoid** `Get` prefix for getters.
+- **Nouns** or noun-like getters for retrieving data (e.g., `JobName()` not `GetJobName()`). <font color="red">**Not confirmed yet**</font>
+- **Avoid** `Get` prefix for getters.  <font color="red">**Not confirmed yet**</font>
 - If function panics on error, **prefix with `Must`** (e.g., `MustParseConfig`).
 - **Type or format suffix** for overloaded or specialized functions (`ParseInt`, `ParseInt64`).
 - Short, idiomatic variable names (`i`, `r`, `err`) for small scope; meaningful names for broader scope.
@@ -114,6 +113,45 @@ func MustOpenConfig(path string) *Config {
     return cfg
 }
 ```
+---
+
+## Duplicate or Ambiguously Similar Exported Functions
+
+Exported functions in Go are differentiated by their names. Go is case-sensitive, so ValidateUser and validateUser are two distinct identifiers. However, for exported functions, only names beginning with uppercase letters (ValidateUser) are accessible outside the package. Having names that differ only in casing or are extremely similar can lead to confusion and errors:
+
+- **Searchability problem:** Developers may accidentally search for ValidateUser but miss validateUser (or vice versa), leading to overlooked code when debugging or refactoring.
+- **Maintenance risk:** Accidentally introducing both ValidateUser and validateUser in the same package can cause ambiguity in intent, especially if both are meant to validate a user but with slightly different logic or visibility.
+- **Collisions and clarity:** If you later change a private function to exported (capitalize the first letter), you might collide with an already existing exported name, causing compilation errors.
+
+**❌ Don’t:**
+```go
+
+func validateOrder(o Order) bool { ... }
+func ValidateOrder(o Order) bool { ... } // now will conflict if internal gets exported later
+
+```
+---
+
+## Avoid Generic Method Names
+
+- **Clarity and Purpose:** The function name should immediately convey what the method does. Generic names like Process are vague and force developers to dig into the code to understand its behavior. A new team member or someone maintaining the code months later will struggle with ambiguous names.
+- **Search and Maintenance:** If every package has a method called Process, searching for usages or debugging becomes cumbersome. You can't tell from the name alone whether it's handling reports, payloads, events, etc.
+- **Domain Language and Consistency:** Good Go naming uses clear, domain-relevant terms. This helps business stakeholders and technical teams understand what code does at a glance, and fosters consistency across the codebase.
+- **Risk of Collisions and Misuse:** Generic names increase the risk of naming collisions and accidental misuse, especially in larger codebases or when refactoring.
+
+```go
+
+// Good: Explicit, clear method names
+func (r *ReportService) GenerateReport(data ReportData) (*Report, error) { ... }
+func (p *PayloadHandler) ValidatePayload(payload Payload) error { ... }
+
+// Bad: Generic method names
+func (r *ReportService) Process(data interface{}) error { ... }
+func (p *PayloadHandler) Process(input interface{}) error { ... }
+
+```
+
+---
 
 
 ## Naming Scenario Table
@@ -128,64 +166,3 @@ func MustOpenConfig(path string) *Config {
 | Type/format suffix for specialization | Yes | Yes | ParseInt, ParseInt64 |
 | Test/benchmark/example functions | Yes | - | TestRegisterUser, BenchmarkEmail |
 
-## Final Function Naming \& Usage Checklist
-
-Use this before **code review** or **Pull Request** submission:
-
-1. **Exported vs. Unexported**
-    - Does this function/method need to be used outside the package? → Capitalized name.
-    - If this is only for internal use, is it lowercase?
-2. **Function vs. Method Appropriateness**
-    - Is this logic truly tied to a type’s data? → Method.
-    - Is this a general-purpose utility? → Standalone function.
-3. **Naming Patterns**
-    - Is the function name a clear verb (for actions) or noun (for getters)?
-    - No `Get` prefix on getters?
-    - If panics on error, is it prefixed with `Must`?
-    - Are type or format suffixes used only when there is function overloading?
-    - No underscores in function names?
-4. **Idiomatic Short Variable Names** 
-    - Are variable names concise yet meaningful? Single letters only for short scope.
-    - Is `err` used for error values, as is Go idiom? **todo Please revise this**
-5. **Special Cases**
-    - Are test/benchmark/example functions named correctly for test files?
-    - For exported functions and types, is there a proper doc comment?
-6. **Consistency \& Clarity**
-    - Do names reflect their roles clearly in context?
-    - Is there any repetitive or redundant naming that can be simplified?
-
-#### Bonus Tips you should know about
-
-- **Single-method interfaces end with -er:** Examples: `Reader`, `Writer`,
-- **Use established names for common operations:** If your type implements a well-known interface (like converting to string), use the canonical method
-
-example
-
-```go
-
-// Converting to String — String() string
-// If your type can be converted to a string representation, implement the String() string method instead of something like ToString() or GetString().
-// 
-// This method is part of the fmt.Stringer interface, which is recognized by many standard library packages (e.g., fmt, log) to produce string outputs.
-
-type User struct {
-    Name string
-    Age  int
-}
-
-// Canonical method to convert User to string
-func (u User) String() string {
-    return fmt.Sprintf("User{Name: %s, Age: %d}", u.Name, u.Age)
-}
-
-// Using fmt.Println(u) will call User.String() automatically
-
-
-```
-
-## Conclusion
-
-Adhering to these function naming standards ensures your Go code is idiomatic, maintainable, and easy for others to understand and use. Regularly review and refactor for clarity and apply the checklist before each submission to maintain a high-quality codebase.
-
----
-Backend is the backbone of **IRON** — clear names ensures it stays robust and easy to maintain.
