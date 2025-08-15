@@ -1,0 +1,38 @@
+[
+  {
+    "doc-section": "Functions",
+    "name": "Function Naming Guidelines",
+    "path": "docs/functions/naming_standard.md"
+  },
+  {
+    "doc-section": "Functions",
+    "name": "Function Design Principles",
+    "path": "docs/functions/design_principles.md"
+  },
+  {
+    "doc-section": "Functions",
+    "name": "Parameter & Return Values",
+    "path": "docs/functions/parameter_return_value.md"
+  },
+  {
+    "doc-section": "Functions",
+    "name": "Method Receiver",
+    "path": "docs/functions/method_receivers.md"
+  },
+  {
+    "doc-section": "Functions",
+    "name": "Function Comments",
+    "path": "docs/functions/function_comments.md"
+  },
+  {
+    "doc-section": "Functions",
+    "name": "Error Handling",
+    "path": "docs/functions/error_handling.md"
+  },
+
+  {
+    "doc-section": "Variables",
+    "name": "Variable Naming Guidelines",
+    "path": "docs/variables/naming_standard.md"
+  }
+]
