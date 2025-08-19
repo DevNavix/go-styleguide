@@ -65,8 +65,6 @@ func CalculateBMI(weightKg, heightM float64) float64 {
 
 - Multiword names: **MixedCaps** (camel case), no underscores.
 - **Verbs** for functions that perform actions (e.g., `SaveFile`, `UpdateRecord`) ex func use to run db queries.
-- **Nouns** or noun-like getters for retrieving data (e.g., `JobName()` not `GetJobName()`). <font color="red">**Not confirmed yet**</font>
-- **Avoid** `Get` prefix for getters.  <font color="red">**Not confirmed yet**</font>
 - If function panics on error, **prefix with `Must`** (e.g., `MustParseConfig`).
 - **Type or format suffix** for overloaded or specialized functions (`ParseInt`, `ParseInt64`).
 - Short, idiomatic variable names (`i`, `r`, `err`) for small scope; meaningful names for broader scope.
