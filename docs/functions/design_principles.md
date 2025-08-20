@@ -4,6 +4,7 @@
 This section outlines the recommended best practices for designing functions in Go to ensure readability, maintainability, and scalability across the codebase.
 
 ---
+<br>
 
 ## Focused and Single-Purpose (SRP)
 
@@ -37,6 +38,7 @@ func saveUserAndSendEmail(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ##  Limit Function Size
 
@@ -88,6 +90,7 @@ func updateUser(ctx context.Context, userID string, updates UserUpdate) error {
 *(This isn’t terrible, but as complexity grows, logic should be split out.)*
 
 ---
+<br>
 
 ##  Use Clear and Consistent Parameter Ordering
 
@@ -115,6 +118,7 @@ func deleteUser(userID string, ctx context.Context) error {
 ```
 
 ---
+<br>
 
 ##  Avoid Side Effects Without Clear Indication
 
@@ -138,6 +142,7 @@ func deactivateUser(ctx context.Context, userID string) error {
 ```
 
 ---
+<br>
 
 ##  Prefer Explicit Over Implicit Behavior
 
@@ -170,6 +175,7 @@ func saveUser(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ##  Minimize Parameters Where Possible
 
@@ -205,6 +211,7 @@ func saveUser(ctx context.Context, user User, sendEmail bool, notifyAdmin bool) 
 ```
 
 ---
+<br>
 
 ##  Always Handle Errors Inside Functions
 
@@ -231,6 +238,7 @@ func saveUser(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ##  Make Return Values Predictable
 

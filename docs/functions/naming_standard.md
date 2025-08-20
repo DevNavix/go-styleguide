@@ -150,17 +150,3 @@ func (p *PayloadHandler) Process(input interface{}) error { ... }
 ```
 
 ---
-
-
-## Naming Scenario Table
-
-| Usage | Exported/Public | Unexported/Internal | Example |
-| :-- | :-- | :-- | :-- |
-| Standalone function | Yes | Yes | RegisterUser, validateEmail |
-| Method tied to a type (struct) | Yes | Yes | Email, isEmailValid |
-| Getters (no `Get` prefix) | Yes | Yes | Email(), name() |
-| Constructors (public) | Yes | (rarely, if at all) | NewAccount |
-| Must-prefix for panic-on-failure | Yes | Yes | MustOpenConfig |
-| Type/format suffix for specialization | Yes | Yes | ParseInt, ParseInt64 |
-| Test/benchmark/example functions | Yes | - | TestRegisterUser, BenchmarkEmail |
-

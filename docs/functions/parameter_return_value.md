@@ -3,6 +3,7 @@
 This section defines standards for function parameters and return values to ensure readability, maintainability, and consistency across the codebase.
 
 ---
+<br>
 
 ## Always Pass `context.Context` as the First Parameter
 
@@ -26,6 +27,7 @@ func getUser(id string, ctx context.Context) (User, error) {
 ```
 
 ---
+<br>
 
 ## Avoid Too Many Parameters
 
@@ -56,6 +58,7 @@ func updateUser(ctx context.Context, id, name, email string, isAdmin bool) error
 ```
 
 ---
+<br>
 
 ## Use Appropriate Parameter Types
 
@@ -87,6 +90,7 @@ func setUserStatus(ctx context.Context, userID string, status string) error {
 ```
 
 ---
+<br>
 
 ## Return Multiple Values Instead of Pointers for Zero Values
 
@@ -114,6 +118,7 @@ func findUser(ctx context.Context, id string) (*User, error) {
 ```
 
 ---
+<br>
 
 ## Return Specific Error Values
 
@@ -142,6 +147,7 @@ func getUser(ctx context.Context, id string) (User, error) {
 ```
 
 ---
+<br>
 
 ## Use Named Return Values for Clarity (When Appropriate)
 
@@ -166,6 +172,7 @@ func countActiveUsers(ctx context.Context) (int, error) {
 ```
 
 ---
+<br>
 
 ## Always Return Zero Values with Errors
 
@@ -194,6 +201,7 @@ func deleteUser(ctx context.Context, id string) (bool, error) {
 ```
 
 ---
+<br>
 
 ## Avoid Using `interface{}/any` as Parameter or Return Type
 
@@ -217,6 +225,7 @@ func getUserEmails(ctx context.Context, ids interface{}) (interface{}, error) {
 ```
 
 ---
+<br>
 
 ## Order Return Values Consistently
 

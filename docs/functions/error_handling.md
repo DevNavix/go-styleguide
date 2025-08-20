@@ -4,6 +4,7 @@ This section defines best practices for handling errors in Go functions.
 Proper error handling improves debugging, prevents silent failures, and keeps error messages consistent across the codebase.
 
 ---
+<br>
 
 ## Always Check and Handle Errors
 
@@ -30,6 +31,7 @@ func SaveUser(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ## Add Context to Errors
 
@@ -55,6 +57,7 @@ func UpdateUser(ctx context.Context, id string, updates UserUpdate) error {
 ```
 
 ---
+<br>
 
 ## Use Sentinel or Typed Errors for Known Conditions
 
@@ -87,6 +90,7 @@ func GetUser(ctx context.Context, id string) (User, error) {
 ```
 
 ---
+<br>
 
 ## Return Zero Values Alongside Errors
 
@@ -115,6 +119,7 @@ func DeleteUser(ctx context.Context, id string) (bool, error) {
 ```
 
 ---
+<br>
 
 ## Fail Fast Inside Functions
 
@@ -142,6 +147,7 @@ func SaveUserAndNotify(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ## Avoid Logging and Returning the Same Error
 
@@ -168,6 +174,7 @@ func SaveUser(ctx context.Context, user User) error {
 ```
 
 ---
+<br>
 
 ## Don’t Use Panics for Normal Errors
 
@@ -196,6 +203,7 @@ func GetUser(ctx context.Context, id string) (User, error) {
 ```
 
 ---
+<br>
 
 ## Match Error Handling to Caller’s Responsibility
 

@@ -4,6 +4,7 @@ This section defines how to write clear, consistent, and useful comments for fun
 Following these rules ensures that code is self-explanatory to both current and future developers.
 
 ---
+<br>
 
 ## Follow Go’s `godoc` Style
 
@@ -29,6 +30,7 @@ func SaveUser(ctx context.Context, user User) error { ... }
 ```
 
 ---
+<br>
 
 
 ## Document Side Effects
@@ -52,6 +54,7 @@ func DeleteUser(ctx context.Context, id string) error { ... }
 ```
 
 ---
+<br>
 
 ## Keep Comments Updated
 
@@ -73,6 +76,7 @@ func GetUser(ctx context.Context, id string) (User, error) { ... }
 ```
 
 ---
+<br>
 
 ## Avoid Redundant Comments
 
@@ -93,6 +97,7 @@ func CountActiveUsers(ctx context.Context) (int, error) { ... }
 ```
 
 ---
+<br>
 
 ## Use Complete Sentences
 
@@ -113,6 +118,7 @@ func Authenticate(ctx context.Context, email, password string) (string, error) {
 ```
 
 ---
+<br>
 
 ## Mention Error Conditions
 

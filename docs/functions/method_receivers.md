@@ -4,6 +4,7 @@ This section defines the standards for using method receivers in Go.
 Choosing between **pointer** and **value** receivers correctly ensures consistent behavior, performance, and maintainability.
 
 ---
+<br>
 
 ## Use Pointer Receivers When Modifying the Receiver
 
@@ -26,6 +27,7 @@ func (u User) Activate() {
 ```
 
 ---
+<br>
 
 ## Use Pointer Receivers for Large Structs
 
@@ -56,6 +58,7 @@ func (u User) SetEmail(email string) {
 ```
 
 ---
+<br>
 
 ## Use Value Receivers for Small, Immutable Structs
 
@@ -83,6 +86,7 @@ func (p *Point) DistanceToOrigin() float64 {
 ```
 
 ---
+<br>
 
 ## Be Consistent Within the Type
 
@@ -112,6 +116,7 @@ func (u *User) Delete(ctx context.Context) error { return nil } // Pointer recei
 ```
 
 ---
+<br>
 
 ## Prefer Functions Over Methods for Stateless Operations
 
@@ -134,6 +139,7 @@ func (u User) validateEmail() bool {
 ```
 
 ---
+<br>
 
 ## Avoid Pointer Receivers for Maps, Slices, and Channels
 
@@ -158,6 +164,7 @@ func (ul *UserList) Count() int {
 ```
 
 ---
+<br>
 
 ## Avoid Exporting Methods That Don’t Belong to the Type
 

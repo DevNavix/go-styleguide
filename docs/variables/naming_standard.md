@@ -4,6 +4,7 @@ Good variable naming improves **readability**, **maintainability**, and **code c
 Variable names should be **short but meaningful**. Short variable names are acceptable when the context makes the purpose obvious, but descriptive names must be used when the context is not immediately clear.
 
 ---
+<br>
 
 ## General Rules
 1. **Use Short Names for Temporary or Well-Known Loop Variables**
@@ -25,6 +26,7 @@ Variable names should be **short but meaningful**. Short variable names are acce
    - Examples: `isActive`, `hasPermission`, `shouldRetry`.
 
 ---
+<br>
 
 ## Examples
 
@@ -85,7 +87,12 @@ customerRecord := getFromDB()
 
 ## **DOs and DON’Ts Table**
 | ✅ Do | ❌ Don’t |
-|------|----------|
+|---
+<br>---
+<br>|---
+<br>---
+<br>---
+<br>-|
 | Use `i`, `j`, `idx` for loop counters or where context is clear  | Use `i`, `j` for unrelated values |
 | Use `userID`, `userName` for map keys & values | Use `k`, `v` when meaning is unclear |
 | Use domain-specific names (`orderID`, `customerList`) | Use generic names (`data`, `info`) |
@@ -99,3 +106,4 @@ customerRecord := getFromDB()
 - Think **self-documenting** — someone reading the variable name should know what it holds without digging into code.
 
 ---
+<br>
