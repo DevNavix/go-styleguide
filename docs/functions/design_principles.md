@@ -267,3 +267,89 @@ func findUser(ctx context.Context, id string) (User, error) {
     return user, nil
 }
 ```
+
+---
+
+### Brevity in Code
+
+Brevity means writing concise code without making it cryptic. Code should be short **only when it improves readability**. Never trade clarity for fewer lines.
+
+#### ✅ When Brevity is Good
+
+* **Avoid unnecessary variables**
+
+  ```go
+  // ❌ verbose
+  var str string
+  str = cmnutil.StringFromAny(val)
+  return str
+
+  // ✅ brief
+  return cmnutil.StringFromAny(val)
+  ```
+
+* **Use early returns to reduce nesting**
+
+  ```go
+  // ❌ nested
+  if err == nil {
+      if str != "" {
+          return cmnutil.FormatToInt(str)
+      }
+  }
+  return 0
+
+  // ✅ brief
+  if err != nil || str == "" {
+      return 0
+  }
+  return cmnutil.FormatToInt(str)
+  ```
+
+* **Inline short temporary values**
+
+  ```go
+  // ❌ verbose
+  decrypted, err := utils.DecryptAES(strVal)
+  if err == nil {
+      strVal = decrypted
+  }
+
+  // ✅ brief
+  if decrypted, err := utils.DecryptAES(strVal); err == nil {
+      strVal = decrypted
+  }
+  ```
+
+#### ❌ When Brevity is Bad
+
+* **Don’t sacrifice clarity for fewer lines**
+
+  ```go
+  // ❌ too compact — hard to read
+  strVal, _ := utils.DecryptAES(cmnutil.StringFromAny(val))
+  return cmnutil.FormatToInt(strVal)
+
+  // ✅ clearer — slightly longer but obvious
+  strVal := cmnutil.StringFromAny(val)
+  if decrypted, err := utils.DecryptAES(strVal); err == nil {
+      strVal = decrypted
+  }
+  return cmnutil.FormatToInt(strVal)
+  ```
+
+* **Don’t over-chain calls**
+
+  ```go
+  // ❌ compact but cryptic
+  return cmnutil.FormatToInt(mustDecrypt(cmnutil.StringFromAny(val)))
+
+  // ✅ easier to debug
+  strVal := cmnutil.StringFromAny(val)
+  strVal = mustDecrypt(strVal)
+  return cmnutil.FormatToInt(strVal)
+  ```
+
+---
+
+Would you like me to also add a **one-line rule statement** (like “Be concise but never at the cost of clarity”) at the start of this section so it aligns with other principles in your guide?

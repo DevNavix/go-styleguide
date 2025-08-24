@@ -150,3 +150,39 @@ func (p *PayloadHandler) Process(input interface{}) error { ... }
 ```
 
 ---
+
+## Boolean Function Naming
+
+* **Use Positive Naming**: Boolean functions should express a clear, positive condition or state.
+
+  ```go
+  // Good
+  func IsUserValid() bool
+  if !IsUserValid() {
+      // Handle invalid user
+  }
+  ```
+
+* **Avoid Double Negatives**: Negative names combined with negation reduce readability.
+
+  ```go
+  // Bad
+  if !IsUserInvalid() {
+      // Handle valid user
+  }
+
+  // Good
+  if IsUserValid() {
+      // Handle valid user
+  }
+  ```
+
+* **Prefer Clear Prefixes**: Use common, consistent prefixes like `Is`, `Has`, `Can`, or `Should` to make conditions obvious.
+
+  ```go
+  func HasPermission() bool
+  func CanRetry() bool
+  func ShouldArchive() bool
+  ```
+
+---
